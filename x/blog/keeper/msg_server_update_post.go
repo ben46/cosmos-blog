@@ -19,10 +19,10 @@ func (k msgServer) UpdatePost(goCtx context.Context, msg *types.MsgUpdatePost) (
 		Body:    msg.Body,
 	}
 	val, found := k.GetPost(ctx, msg.Id)
-	if !found {
+	if !found { // 判断是否存在
 		return nil, errorsmod.Wrap(sdkerrors.ErrKeyNotFound, fmt.Sprintf("key %d not found", msg.Id))
 	}
-	if msg.Creator != val.Creator {
+	if msg.Creator != val.Creator { // 判断是否是创建者
 		return nil, errorsmod.Wrap(sdkerrors.ErrUnauthorized, "Incorrect Owner")
 	}
 	k.SetPost(ctx, post)

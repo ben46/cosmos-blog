@@ -85,6 +85,46 @@ paths:
                 type: string
       tags:
         - Msg
+  /blog.blog.Msg/DeletePost:
+    post:
+      operationId: BlogBlogMsg_DeletePost
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              id:
+                type: string
+                format: uint64
+      tags:
+        - Msg
   /blog.blog.Msg/UpdateParams:
     post:
       summary: |-
@@ -16758,6 +16798,16 @@ definitions:
       id:
         type: string
         format: uint64
+  blog.blog.MsgDeletePost:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+  blog.blog.MsgDeletePostResponse:
+    type: object
   blog.blog.MsgUpdateParams:
     type: object
     properties:
