@@ -138,6 +138,50 @@ paths:
             description: MsgUpdateParams is the Msg/UpdateParams request type.
       tags:
         - Msg
+  /blog.blog.Msg/UpdatePost:
+    post:
+      operationId: BlogBlogMsg_UpdatePost
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              title:
+                type: string
+              body:
+                type: string
+              id:
+                type: string
+                format: uint64
+      tags:
+        - Msg
   /cosmos.auth.v1beta1.Msg/UpdateParams:
     post:
       summary: >-
@@ -16731,6 +16775,20 @@ definitions:
     description: |-
       MsgUpdateParamsResponse defines the response structure for executing a
       MsgUpdateParams message.
+  blog.blog.MsgUpdatePost:
+    type: object
+    properties:
+      creator:
+        type: string
+      title:
+        type: string
+      body:
+        type: string
+      id:
+        type: string
+        format: uint64
+  blog.blog.MsgUpdatePostResponse:
+    type: object
   cosmos.auth.v1beta1.MsgUpdateParams:
     type: object
     properties:
